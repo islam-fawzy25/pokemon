@@ -6,13 +6,13 @@ import SinglePokemonPage from './client/pages/single-pokemon-page/SinglePokemon.
 function App() {
   return (
 
-
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<PokemonPage />} />
-        <Route path="/pokemon/:name" element={<SinglePokemonPage />} />
-      </Routes>
-    </BrowserRouter>
+    <PokemonPage />
+    // <BrowserRouter>
+    //   <Routes>
+    //     <Route path="/pokemon/" element={<PokemonPage />} />
+    //     <Route path="/pokemon/:name" element={<SinglePokemonPage />} />
+    //   </Routes>
+    // </BrowserRouter>
   );
 }
 
