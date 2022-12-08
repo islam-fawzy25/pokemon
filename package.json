@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://islam-fawzy25.github.io/pokemon",
   "dependencies": {
+    "@jridgewell/sourcemap-codec": "^1.4.14",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -13,11 +14,14 @@
     "@types/react-dom": "^18.0.9",
     "@types/react-router-dom": "^5.3.3",
     "bootstrap": "^5.2.3",
+    "is-svg": "^4.3.2",
+    "latest-version": "^7.0.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.4",
     "react-scripts": "5.0.1",
+    "svgo": "^3.0.2",
     "typescript": "^4.9.3",
     "web-vitals": "^2.1.4"
   },
