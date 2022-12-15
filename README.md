@@ -10,4 +10,4 @@ A platform helping users to find their favourite pokemon.
 ## Search bar
 ## Pagination
 <hr/>
-<img src="./src/images/pokemon.png" width="700"/>
+<img src="./src/images/pokemon.png" width="400"/>
