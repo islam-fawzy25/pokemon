@@ -6,7 +6,7 @@ import Card from "../../components/main-card/card.component";
 import SelectNumberOfPages from "../../components/select-bar/SelectBar.component";
 import Sort from "../../components/sort-bar/Sort.component";
 import SearchBar from "../../components/search-bar/search.component";
-
+import useFetch from "../../helper/useFetch";
 
 
 export default function PokemonPage() {
@@ -26,11 +26,12 @@ export default function PokemonPage() {
     const [displaySearch, setDisplaySearch] = useState(false)
     const [searchValue, setSearchValue] = useState("")
     const [searchResult, setSearchResult] = useState([])
-
+    // const {data:pokemonData,error,loading} =  useFetch(`https://pokeapi.co/api/v2/pokemon?offset=40&limit=${numberOfPokemons}`)
     useEffect(() => {
         (async () => {
-            const pokemonData = await fetchDb(`https://pokeapi.co/api/v2/pokemon?offset=40&limit=${numberOfPokemons}`)
-            const pokemonsNames = pokemonData.results.map(pokemon => pokemon.name)
+            const { data: pokemonData, error } = await fetchDb(`https://pokeapi.co/api/v2/pokemon?offset=40&limit=${numberOfPokemons}`)
+
+            const pokemonsNames = await pokemonData.results.map(pokemon => pokemon.name)
             setPokemonsData(() => {
                 if (sortReverse) { return setPokemonsData(pokemonsNames.sort((a, b) => { return b.localeCompare(a) })) }
                 if (sortDescending) { return setPokemonsData(pokemonsNames.sort((a, b) => { return a.localeCompare(b) })) }
@@ -65,7 +66,6 @@ export default function PokemonPage() {
             </nav>
             <main>
                 {!pokemonsData && <h1>Loading ...</h1>}
-
                 {!displaySearch && pokemonsData &&
                     pokemonsData.slice(pagesVisited, pagesVisited + pokemonPerPgae)
                         .map((pokemon) => (
@@ -73,14 +73,12 @@ export default function PokemonPage() {
                                 <Card pokemonName={pokemon}> </Card>
                             </div>
                         ))}
-
                 {displaySearch && searchResult.slice(pagesVisited, pagesVisited + pokemonPerPgae)
                     .map((pokemon) => (
                         <div key={pokemon}>
                             <Card pokemonName={pokemon}> </Card>
                         </div>
                     ))}
-
             </main>
         </div>
     )
