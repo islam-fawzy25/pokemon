@@ -1,3 +1,6 @@
+// i need to refactor this code and divide it to be more smaller
+// 1- create component for image 2- create image for ability
+// 3 ican use go back for more details 
 import React, { useEffect, useState } from 'react';
 import "./card.css"
 import { fetchDb } from '../../helper/fetchMethod';

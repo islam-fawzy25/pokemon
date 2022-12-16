@@ -1,3 +1,4 @@
+// this is container not component 
 import React, { useEffect, useState } from 'react';
 import "./Single-card.css"
 import { fetchDb } from '../../helper/fetchMethod';

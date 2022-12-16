@@ -2,13 +2,13 @@ import React from "react";
 import "./dropDown.css"
 
 interface Props {
-    children:any
-    visible:boolean
-    onClick:()=>void
-    title:string
+    children: any
+    visible: boolean
+    onClick: () => void
+    title: string
 }
 
-export default function DropDown(props:Props) {
+export default function DropDown(props: Props) {
     const { children, visible, onClick, title } = props;
     return (
         <div className="dropdown-container">

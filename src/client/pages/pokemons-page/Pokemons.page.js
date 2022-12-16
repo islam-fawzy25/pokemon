@@ -1,3 +1,4 @@
+// i will creat pagination component not ui 
 import React, { useEffect, useState } from "react";
 import "./pokemons-page.css"
 import { fetchDb } from "../../helper/fetchMethod";
@@ -29,18 +30,18 @@ export default function PokemonPage() {
     useEffect(() => {
         (async () => {
             const pokemonData = await fetchDb(`https://pokeapi.co/api/v2/pokemon?offset=40&limit=${numberOfPokemons}`)
-            const pokemonsNames =  pokemonData.results.map(pokemon => pokemon.name)
+            const pokemonsNames = pokemonData.results.map(pokemon => pokemon.name)
             setPokemonsData(() => {
                 if (sortReverse) { return setPokemonsData(pokemonsNames.sort((a, b) => { return b.localeCompare(a) })) }
                 if (sortDescending) { return setPokemonsData(pokemonsNames.sort((a, b) => { return a.localeCompare(b) })) }
                 return pokemonsNames
             })
-            const filteredSearchResult =  pokemonsNames.filter(pokemon => pokemon.includes(searchValue))
-            if(searchValue){  return  setSearchResult(filteredSearchResult)}
-            if (filteredSearchResult.length === 400) {return setDisplaySearch(false) }
+            const filteredSearchResult = pokemonsNames.filter(pokemon => pokemon.includes(searchValue))
+            if (searchValue) { return setSearchResult(filteredSearchResult) }
+            if (filteredSearchResult.length === 400) { return setDisplaySearch(false) }
         })()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [sortReverse, sortDescending, displaySearch,searchValue])
+    }, [sortReverse, sortDescending, displaySearch, searchValue])
 
     return (
         <div className="pokemon-page-container">
@@ -79,7 +80,7 @@ export default function PokemonPage() {
                             <Card pokemonName={pokemon}> </Card>
                         </div>
                     ))}
-          
+
             </main>
         </div>
     )
