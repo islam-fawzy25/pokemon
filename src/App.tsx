@@ -8,13 +8,14 @@ function App() {
   return (
     <div>
 
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <Routes>
           <Route path="/" element={<PokemonPage />} />
           <Route path="pokemon/:name" element={<SinglePokemonPage />} />
         </Routes>
       </BrowserRouter>
-
+ */}
+          <Route path="/" element={<PokemonPage />} />
 
     </div>
 
