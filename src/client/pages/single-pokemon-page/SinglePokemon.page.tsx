@@ -10,7 +10,7 @@ export default function SinglePokemonPage() {
     return (
         <div className="single-pokemon-page-container">
             <GenericButton
-                handleOnClick={() => { navigate('/pokemons') }}
+                handleOnClick={() => { navigate('/') }}
                 buttonLable={"<< Back"}
                 className={"go-back-button"}
             />

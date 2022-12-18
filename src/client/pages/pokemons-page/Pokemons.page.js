@@ -87,8 +87,11 @@ export default function PokemonPage() {
                     .map((pokemon) => (
                         <div key={pokemon}>
                             <Card pokemonName={pokemon} url={`https://pokeapi.co/api/v2/pokemon/${pokemon}`} >
-
-
+                            <GenericButton 
+                                    handleOnClick={() => { navigate(`/pokemon/${pokemon}`) }} 
+                                    buttonLable={`See Details `} 
+                                    className={"see-details-button"}
+                                    />
                             </Card>
                         </div>
                     ))}
