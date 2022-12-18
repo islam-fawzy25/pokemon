@@ -1,20 +1,15 @@
 // i need to refactor this code and divide it to be more smaller
 // 1- create component for image 2- create image for ability
 // 3 ican use go back for more details 
-import React, { useEffect, useState } from 'react';
-import "./card.css"
-import { fetchDb } from '../../helper/fetchMethod';
+import "./card.styles.css"
 import useFetch from '../../helper/useFetch';
 
-export default function Card({ pokemonName }) {
-    const [pokemonData, setPokemonData] = useState([])
-    const [imageURl, setImageUrl] = useState("")
-    const [pokemonAbilities, setPokemonAbilities] = useState([])
-    const { data: response,error } = useFetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
-
+export default function Card({ pokemonName, url, children }) {
+    const { data: response, error, loading } = useFetch(url)
     return (
         <>
-        {error && <h1>Loading ...</h1>} 
+            {error && <h1>Error!</h1>}
+            {loading && <h1>Loading ...</h1>}
             {response &&
                 <div className='card-container'>
                     <div className='image-container'>
@@ -40,9 +35,7 @@ export default function Card({ pokemonName }) {
                     <div className='hr'>
                         <hr />
                     </div>
-                    <div className='see-details'>
-                        <a href={`/pokemon/${pokemonName}`}>See Details</a>
-                    </div>
+                    {children}
                 </div>
             }
         </>

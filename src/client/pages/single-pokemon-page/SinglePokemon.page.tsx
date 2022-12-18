@@ -1,12 +1,19 @@
 import React from "react";
 import "./single-pokemon-page.css"
 import SingleCard from "../../components/single-card/SingleCard.component";
-import GoBack from "../../components/goBack/GoBack.component";
+import GenericButton from "../../components/genericButton/GenericButton.component";
+import { useNavigate } from 'react-router-dom';
 
 export default function SinglePokemonPage() {
+    const navigate = useNavigate();
+
     return (
         <div className="single-pokemon-page-container">
-            <GoBack></GoBack>
+            <GenericButton
+                handleOnClick={() => { navigate('/pokemons') }}
+                buttonLable={"<< Back"}
+                className={"go-back-button"}
+            />
             <SingleCard></SingleCard>
         </div>
     )

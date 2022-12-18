@@ -7,7 +7,8 @@ import SelectNumberOfPages from "../../components/select-bar/SelectBar.component
 import Sort from "../../components/sort-bar/Sort.component";
 import SearchBar from "../../components/search-bar/search.component";
 import useFetch from "../../helper/useFetch";
-
+import GenericButton from "../../components/genericButton/GenericButton.component";
+import { useNavigate } from 'react-router-dom';
 
 export default function PokemonPage() {
     const [pokemonsData, setPokemonsData] = useState()
@@ -26,6 +27,8 @@ export default function PokemonPage() {
     const [displaySearch, setDisplaySearch] = useState(false)
     const [searchValue, setSearchValue] = useState("")
     const [searchResult, setSearchResult] = useState([])
+    const navigate = useNavigate();
+
     // const {data:pokemonData,error,loading} =  useFetch(`https://pokeapi.co/api/v2/pokemon?offset=40&limit=${numberOfPokemons}`)
     useEffect(() => {
         (async () => {
@@ -70,13 +73,23 @@ export default function PokemonPage() {
                     pokemonsData.slice(pagesVisited, pagesVisited + pokemonPerPgae)
                         .map((pokemon) => (
                             <div key={pokemon}>
-                                <Card pokemonName={pokemon}> </Card>
+                                <Card pokemonName={pokemon} url={`https://pokeapi.co/api/v2/pokemon/${pokemon}`} >
+                                    <GenericButton 
+                                    handleOnClick={() => { navigate(`/pokemon/${pokemon}`) }} 
+                                    buttonLable={`See Details `} 
+                                    className={"see-details-button"}
+                                    />
+                                </Card>
+
                             </div>
                         ))}
                 {displaySearch && searchResult.slice(pagesVisited, pagesVisited + pokemonPerPgae)
                     .map((pokemon) => (
                         <div key={pokemon}>
-                            <Card pokemonName={pokemon}> </Card>
+                            <Card pokemonName={pokemon} url={`https://pokeapi.co/api/v2/pokemon/${pokemon}`} >
+
+
+                            </Card>
                         </div>
                     ))}
             </main>

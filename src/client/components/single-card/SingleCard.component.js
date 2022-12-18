@@ -1,6 +1,6 @@
 // this is container not component 
 import React, {  useState } from 'react';
-import "./Single-card.css"
+import "./singleCard.styles.css"
 import { useParams } from "react-router-dom";
 import DropDown from '../dropDown/DropDown.component';
 import useFetch from '../../helper/useFetch';

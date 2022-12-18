@@ -1,0 +1,14 @@
+.go-back-button{
+    background-color: rgb(100, 149, 237);
+    color: white;
+    border-radius: 5px;
+    width: 12em;
+}
+
+.see-details-button{
+    width: 12em;
+    padding: 0px;
+    border: 0;
+    background-color: white;
+    cursor: pointer;
+}
