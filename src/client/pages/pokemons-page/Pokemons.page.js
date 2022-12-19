@@ -1,4 +1,5 @@
-// i will creat pagination component not ui 
+// i will creat pagination component not use ui
+// i need to find another hosting provide routers  
 import React, { useEffect, useState } from "react";
 import "./pokemons-page.css"
 import { fetchDb } from "../../helper/fetchMethod";
@@ -27,7 +28,7 @@ export default function PokemonPage() {
     const [displaySearch, setDisplaySearch] = useState(false)
     const [searchValue, setSearchValue] = useState("")
     const [searchResult, setSearchResult] = useState([])
-    // const navigate = useNavigate(); // navigate(`/pokemon/${pokemon}`) 
+     const navigate = useNavigate(); 
 
     // const {data:pokemonData,error,loading} =  useFetch(`https://pokeapi.co/api/v2/pokemon?offset=40&limit=${numberOfPokemons}`)
     useEffect(() => {
@@ -75,7 +76,7 @@ export default function PokemonPage() {
                             <div key={pokemon}>
                                 <Card pokemonName={pokemon} url={`https://pokeapi.co/api/v2/pokemon/${pokemon}`} >
                                     <GenericButton 
-                                    handleOnClick={() => { }} 
+                                    handleOnClick={() => { navigate(`/pokemon/${pokemon}`) }} 
                                     buttonLable={`See Details `} 
                                     className={"see-details-button"}
                                     />
@@ -88,7 +89,7 @@ export default function PokemonPage() {
                         <div key={pokemon}>
                             <Card pokemonName={pokemon} url={`https://pokeapi.co/api/v2/pokemon/${pokemon}`} >
                             <GenericButton 
-                                    handleOnClick={() => { }} 
+                                    handleOnClick={() => {navigate(`/pokemon/${pokemon}`)  }} 
                                     buttonLable={`See Details `} 
                                     className={"see-details-button"}
                                     />
