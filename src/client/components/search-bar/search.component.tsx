@@ -12,7 +12,7 @@ export default function SearchBar({ setDisplaySearch, setSearchValue, searchValu
                 value={searchValue}
                 onChange={(e) => {
                     setSearchValue(e.target.value.toLowerCase())
-                    setDisplaySearch(true)
+                    setDisplaySearch(e.target.value.length === 0 ? false : true)
                 }}
             />
         </>

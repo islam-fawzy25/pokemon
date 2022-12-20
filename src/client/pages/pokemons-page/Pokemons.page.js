@@ -1,5 +1,4 @@
 // i will creat pagination component not use ui
-// i need to find another hosting provide routers  
 import React, { useEffect, useState } from "react";
 import "./pokemons-page.css"
 import { fetchDb } from "../../helper/fetchMethod";
@@ -13,6 +12,8 @@ import { useNavigate } from 'react-router-dom';
 
 export default function PokemonPage() {
     const [pokemonsData, setPokemonsData] = useState()
+    const [pokemonsDataError, setPokemonsDataError] = useState(false)
+    const [pokemonsDataLoading, setPokemonsDataLoading] = useState(false)
     //Select bar stats +  // Pagination
     const [pokemonsPerPage, setPokemonsPerPage] = useState(10)
     const [pageNumber, setPageNumber] = useState(0)
@@ -27,27 +28,26 @@ export default function PokemonPage() {
     // Search bar
     const [displaySearch, setDisplaySearch] = useState(false)
     const [searchValue, setSearchValue] = useState("")
-    const [searchResult, setSearchResult] = useState([])
-     const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
-    // const {data:pokemonData,error,loading} =  useFetch(`https://pokeapi.co/api/v2/pokemon?offset=40&limit=${numberOfPokemons}`)
     useEffect(() => {
         (async () => {
-            const { data: pokemonData, error } = await fetchDb(`https://pokeapi.co/api/v2/pokemon?offset=40&limit=${numberOfPokemons}`)
-
-            const pokemonsNames = await pokemonData.results.map(pokemon => pokemon.name)
-            setPokemonsData(() => {
-                if (sortReverse) { return setPokemonsData(pokemonsNames.sort((a, b) => { return b.localeCompare(a) })) }
-                if (sortDescending) { return setPokemonsData(pokemonsNames.sort((a, b) => { return a.localeCompare(b) })) }
-                return pokemonsNames
-            })
-            const filteredSearchResult = pokemonsNames.filter(pokemon => pokemon.includes(searchValue))
-            if (searchValue) { return setSearchResult(filteredSearchResult) }
-            if (filteredSearchResult.length === 400) { return setDisplaySearch(false) }
+            try {
+                setPokemonsDataLoading(true)
+                const { data: pokemonData, error } = await fetchDb(`https://pokeapi.co/api/v2/pokemon?offset=40&limit=${numberOfPokemons}`)
+                error ? setPokemonsDataError(error) : setPokemonsDataLoading(true)
+                const pokemonsNames = await pokemonData.results.map(pokemon => pokemon.name)
+                sortReverse ? setPokemonsData(pokemonsNames.sort((a, b) => { return b.localeCompare(a) })) : setPokemonsData(pokemonsNames)
+                sortDescending ? setPokemonsData(pokemonsNames.sort((a, b) => { return a.localeCompare(b) })) : setPokemonsData(pokemonsNames)
+                displaySearch ? setPokemonsData(pokemonsNames.filter((pokemon) => pokemon.includes(searchValue))) : setPokemonsData(pokemonsNames)
+                setPokemonsDataLoading(false)
+            } catch (error) {
+                setPokemonsDataLoading(false)
+                setPokemonsDataError(true)
+            }
         })()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sortReverse, sortDescending, displaySearch, searchValue])
-
     return (
         <div className="pokemon-page-container">
             <nav className="nav-bar">
@@ -69,33 +69,21 @@ export default function PokemonPage() {
                 </div>
             </nav>
             <main>
-                {!pokemonsData && <h1>Loading ...</h1>}
-                {!displaySearch && pokemonsData &&
+                {pokemonsDataLoading && <h1>Loading ...</h1>}
+                {pokemonsDataError && <h1>Error!</h1>}
+                {pokemonsData &&
                     pokemonsData.slice(pagesVisited, pagesVisited + pokemonPerPgae)
                         .map((pokemon) => (
                             <div key={pokemon}>
                                 <Card pokemonName={pokemon} url={`https://pokeapi.co/api/v2/pokemon/${pokemon}`} >
-                                    <GenericButton 
-                                    handleOnClick={() => { navigate(`/pokemon/${pokemon}`) }} 
-                                    buttonLable={`See Details `} 
-                                    className={"see-details-button"}
+                                    <GenericButton
+                                        handleOnClick={() => { navigate(`/pokemon/${pokemon}`) }}
+                                        buttonLable={`See Details `}
+                                        className={"see-details-button"}
                                     />
                                 </Card>
-
                             </div>
                         ))}
-                {displaySearch && searchResult.slice(pagesVisited, pagesVisited + pokemonPerPgae)
-                    .map((pokemon) => (
-                        <div key={pokemon}>
-                            <Card pokemonName={pokemon} url={`https://pokeapi.co/api/v2/pokemon/${pokemon}`} >
-                            <GenericButton 
-                                    handleOnClick={() => {navigate(`/pokemon/${pokemon}`)  }} 
-                                    buttonLable={`See Details `} 
-                                    className={"see-details-button"}
-                                    />
-                            </Card>
-                        </div>
-                    ))}
             </main>
         </div>
     )

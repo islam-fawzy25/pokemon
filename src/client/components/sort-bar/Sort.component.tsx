@@ -15,11 +15,15 @@ export default function Sort({
   return (
     <>
       <select>
-        <option >sort ...</option>
+        <option onClick={() => {
+          setSortReverse(false)
+          setSortDescending(false)
+        }}>sort ...</option>
         <option onClick={() => {
           setSortReverse(false)
           setSortDescending(true)
-        }} >From A-Z</option>
+        }} > From A-Z </option>
+
         <option onClick={() => {
           setSortDescending(false)
           setSortReverse(true)
