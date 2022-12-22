@@ -1,6 +1,5 @@
 // i need to refactor this code and divide it to be more smaller
-// 1- create component for image 2- create image for ability
-// 3 ican use go back for more details 
+// 1- create component for image 
 import "./card.styles.css"
 import useFetch from '../../helper/useFetch';
 

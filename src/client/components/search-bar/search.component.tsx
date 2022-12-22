@@ -4,7 +4,6 @@ interface Props {
     setSearchValue: (value: string) => string
     searchValue: string
 }
-// for a search feature 
 export default function SearchBar({ setDisplaySearch, setSearchValue, searchValue }: Props) {
     return (
         <>

@@ -11,7 +11,6 @@ export default  function useFetch(url:string){
                 try{
                     setLoading(true)
                     const response:any = await fetch(url)
-                    
                     if(response.ok){
                         setLoading(false)
                         const data = await response.json()
@@ -25,8 +24,6 @@ export default  function useFetch(url:string){
             }
         )()
     }, [url])
-
     return { data, error, loading }
-
 }
   

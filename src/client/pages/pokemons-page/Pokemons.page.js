@@ -1,12 +1,11 @@
 // i will creat pagination component not use ui
 import React, { useEffect, useState } from "react";
-import "./pokemons-page.css"
+import "./pokemons-page.styles.css"
 import { fetchDb } from "../../helper/fetchMethod";
 import Card from "../../components/main-card/card.component";
 import SelectNumberOfPages from "../../components/select-bar/SelectBar.component";
 import Sort from "../../components/sort-bar/Sort.component";
 import SearchBar from "../../components/search-bar/search.component";
-import useFetch from "../../helper/useFetch";
 import GenericButton from "../../components/genericButton/GenericButton.component";
 import { useNavigate } from 'react-router-dom';
 
@@ -75,7 +74,8 @@ export default function PokemonPage() {
                     pokemonsData.slice(pagesVisited, pagesVisited + pokemonPerPgae)
                         .map((pokemon) => (
                             <div key={pokemon}>
-                                <Card pokemonName={pokemon} url={`https://pokeapi.co/api/v2/pokemon/${pokemon}`} >
+                                <Card pokemonName={pokemon}
+                                    url={`https://pokeapi.co/api/v2/pokemon/${pokemon}`} >
                                     <GenericButton
                                         handleOnClick={() => { navigate(`/pokemon/${pokemon}`) }}
                                         buttonLable={`See Details `}
